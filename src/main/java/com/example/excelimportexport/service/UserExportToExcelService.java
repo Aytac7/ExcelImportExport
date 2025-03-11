@@ -30,12 +30,14 @@ public class UserExportToExcelService extends ReportAbstract {
             int columnCount = 0;
             createCell(row, columnCount++, UserDTO.getId(), style);
             createCell(row, columnCount++, UserDTO.getName(), style);
+            createCell(row, columnCount++, UserDTO.getSurname(), style);
+            createCell(row, columnCount++, UserDTO.getBirthPlace(), style);
             createCell(row, columnCount++, UserDTO.getDob().toString(), style);
 
-            String dobValue = (UserDTO.getDob() != null) ? UserDTO.getDob().toString() : "N/A";
-            createCell(row, columnCount++, dobValue, style);
+//            String dobValue = (UserDTO.getDob() != null) ? UserDTO.getDob().toString() : "N/A";
+//            createCell(row, columnCount++, dobValue, style);
 
-            createCell(row, columnCount++, UserDTO.getBirthPlace(), style);
+
 
 
         }
