@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -25,17 +26,18 @@ public class UserExportToExcelService extends ReportAbstract {
 
         int startRow = 2;
 
-        for (UserDTO UserDTO : list) {
+        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (UserDTO userDTO : list) {
             Row row = sheet.createRow(startRow++);
             int columnCount = 0;
-            createCell(row, columnCount++, UserDTO.getId(), style);
-            createCell(row, columnCount++, UserDTO.getName(), style);
-            createCell(row, columnCount++, UserDTO.getSurname(), style);
-            createCell(row, columnCount++, UserDTO.getBirthPlace(), style);
-            createCell(row, columnCount++, UserDTO.getDob().toString(), style);
 
-//            String dobValue = (UserDTO.getDob() != null) ? UserDTO.getDob().toString() : "N/A";
-//            createCell(row, columnCount++, dobValue, style);
+            createCell(row, columnCount++, userDTO.getId(), style);
+            createCell(row, columnCount++, userDTO.getName(), style);
+            createCell(row, columnCount++, userDTO.getSurname(), style);String dob= (userDTO.getDob()!=null )? userDTO.getDob().format(formatter) : "N/A";
+            createCell(row, columnCount++, dob, style);
+            createCell(row, columnCount++, userDTO.getBirthPlace(), style);
+
 
 
 
