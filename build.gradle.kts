@@ -37,6 +37,9 @@ dependencies {
     implementation ("org.apache.poi:poi-ooxml:4.1.2")
     runtimeOnly("org.postgresql:postgresql")
 
+    implementation ("org.apache.poi:poi-ooxml:4.1.2")
+
+
 
 }
 

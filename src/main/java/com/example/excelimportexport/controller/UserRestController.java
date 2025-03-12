@@ -79,9 +79,11 @@ public class UserRestController {
     public ResponseEntity<Object> saveExcelData() {
         try {
             List<User> excelDataAsList = excelService.getExcelDataAsList();
+            System.out.println(excelDataAsList);
             int noOfRecords = excelService.saveExcelData(excelDataAsList);
             return ResponseEntity.status(HttpStatus.OK).body("Number of records saved: " + noOfRecords);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while saving the data.");
         }
     }

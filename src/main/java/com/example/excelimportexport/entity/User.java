@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,11 +17,13 @@ import java.time.LocalDateTime;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long Id;
+	Long id;
 	String name;
 	String surname;
-	LocalDateTime dob;
+	LocalDate dob;
 	String birthPlace;
 //	String receivedDate;
+
+
 
 }

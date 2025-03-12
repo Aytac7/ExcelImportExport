@@ -1,3 +1,57 @@
+package com.example.excelimportexport.controller;
+
+import com.example.excelimportexport.service.export.UserReportService;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+
+@RestController
+@RequestMapping("/v1/report/user")
+@RequiredArgsConstructor
+public class UserController {
+
+
+    private  final UserReportService userReportService;
+
+
+    @GetMapping("/excel/all")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        this.userReportService.exportToExcel(response);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //package com.example.excelimportexport.controller;
 //
 //import java.util.List;

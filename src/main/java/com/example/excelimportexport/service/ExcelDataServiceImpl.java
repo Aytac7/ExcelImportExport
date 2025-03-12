@@ -2,7 +2,10 @@ package com.example.excelimportexport.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +28,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ExcelDataServiceImpl implements IExcelDataService {
 
-	@Value("${app.upload.file:${user.home}}")
-	public String EXCEL_FILE_PATH;
+//	@Value("${app.upload.file}")
+//	public String EXCEL_FILE_PATH;
 
 
 	private final UserRepository userRepository;
@@ -37,10 +40,11 @@ public class ExcelDataServiceImpl implements IExcelDataService {
 
 		List<String> list = new ArrayList<String>();
 
+
 		DataFormatter dataFormatter = new DataFormatter();
 
 		try {
-			workbook = WorkbookFactory.create(new File(EXCEL_FILE_PATH));
+			workbook = WorkbookFactory.create(new File("C:\\Users\\avramazanli\\IdeaProjects\\ExcelImportExport\\files\\UserExcel_20.xlsx"));
 		} catch (EncryptedDocumentException | IOException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +63,7 @@ public class ExcelDataServiceImpl implements IExcelDataService {
 			}
 		}
 
-		List<User> invList = createList(list, noOfColumns);
+		List<User> invList = createList(list, noOfColumns, sheet);
 
 		try {
 			workbook.close();
@@ -71,24 +75,39 @@ public class ExcelDataServiceImpl implements IExcelDataService {
 		return invList;
 	}
 
-	private List<User> createList(List<String> excelData, int noOfColumns) {
-
+	private List<User> createList(List<String> excelData, int noOfColumns, Sheet sheet) {
 		ArrayList<User> invList = new ArrayList<User>();
-
-		int i = noOfColumns;
+		int i = 10;
 		do {
 			User user = new User();
-
-			user.setName(excelData.get(i));
-			user.setSurname(excelData.get(i+1));
-			user.setBirthPlace(excelData.get(i+2));
-			user.setDob(LocalDateTime.parse(excelData.get(i+3)));
-//			user.setReceivedDate(excelData.get(i + 4));
+			user.setId(Long.parseLong(excelData.get(i)));
+			user.setName(excelData.get(i+1));
+			user.setSurname(excelData.get(i+2));
+			if(excelData.get(i+3) != null && !excelData.get(i + 3).isEmpty()) {
+				String dateString = excelData.get(i + 3);
+				if (dateString.matches("\\d{4}-\\d{2}-\\d{2}")) {
+					System.out.println(dateString);
+					try {
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						LocalDate dateTime = LocalDate.parse(dateString, formatter);
+						user.setDob(dateTime);
+						System.out.println("Parse olunan zaman: " + dateTime);
+					} catch (DateTimeParseException e) {
+						System.out.println("Stringi parse etmək mümkün olmadı.");
+					}
+				}
+			}
+			user.setBirthPlace(excelData.get(i+4));
+			//System.out.println(excelData.get(i+3));
+			//user.setDob(LocalDateTime.parse(excelData.get(i+3)));
+//			System.out.println(excelData.get(i + 3));
+//			user.setDob(LocalDateTime.parse(excelData.get(i + 3)));
 
 			invList.add(user);
-			i = i + (noOfColumns);
+			i+=5;
 
 		} while (i < excelData.size());
+		System.out.println(invList);
 		return invList;
 	}
 

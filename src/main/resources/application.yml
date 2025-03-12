@@ -18,7 +18,8 @@ spring:
       prefix: /WEB-INF/pages/
       suffix: .jsp
 
-app:
-  upload:
-    dir: C:/Users/avramazanli/Downloads/
-    file: excel.xlsx
+#app:
+#  upload:
+#    dir: './files/UserExcel_20.xlsx'
+#    file: UserExcel_20.xlsx
+
