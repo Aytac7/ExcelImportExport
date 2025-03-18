@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class  ReportAbstract {
+public abstract class ReportAbstract {
 
 
     public XSSFWorkbook workbook;
@@ -44,7 +44,6 @@ public abstract class  ReportAbstract {
         font.setFontHeight(20);
         style.setFont(font);
         style.setAlignment(HorizontalAlignment.CENTER);
-
 
 
         createCell(row, 0, titleName, style);

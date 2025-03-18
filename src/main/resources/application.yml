@@ -13,13 +13,12 @@ spring:
 
 
 
-  mvc:
-    view:
-      prefix: /WEB-INF/pages/
-      suffix: .jsp
 
-#app:
-#  upload:
-#    dir: './files/UserExcel_20.xlsx'
-#    file: UserExcel_20.xlsx
+app:
+  upload:
+   file: "C:/Users/avramazanli/IdeaProjects/ExcelImportExport/files/UserReportTest.xlsx"
+server:
+  port: 8081
+
+
 

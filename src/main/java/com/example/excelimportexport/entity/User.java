@@ -22,7 +22,6 @@ public class User {
 	String surname;
 	LocalDate dob;
 	String birthPlace;
-//	String receivedDate;
 
 
 
